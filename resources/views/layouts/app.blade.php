@@ -73,6 +73,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            @yield('custom-nav')
                         @endif
                     </ul>
                 </div>

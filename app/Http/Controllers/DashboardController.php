@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Addresses;
 
 class DashboardController extends Controller
 {
@@ -21,8 +23,21 @@ class DashboardController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function Index()
   {
       return view('dashboard');
   }
+  /**
+   * Show the dashboards addresses.
+   *
+   * @return \Illuminate\Http\Response
+   */
+   public function Addresses()
+   {
+     $addresses = Addresses::where(['userid' => Auth::id()]);
+
+     return view('dashboard.addresses', ['addresses' => $addresses]);
+
+   }
+
 }
