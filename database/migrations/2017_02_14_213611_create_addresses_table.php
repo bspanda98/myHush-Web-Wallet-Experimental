@@ -13,7 +13,12 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('addresses', function (Blueprint $table) {
+          $table->increments('id');
+          $table->integer('userid');
+          $table->string('address');
+          $table->timestamps();
+      });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('addresses');
     }
 }
