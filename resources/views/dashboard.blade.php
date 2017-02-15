@@ -32,7 +32,7 @@
                 <div class="panel-heading">Total Send</div>
 
                 <div class="panel-body">
-
+                  {{ $totalsend }}
                 </div>
             </div>
         </div>
@@ -45,15 +45,24 @@
   <table class="table">
     <thead>
       <tr>
-        <th>#</th>
         <th>Date</th>
         <th>Amount</th>
-        <th>Receiving address</th>
+        <th>Address</th>
+        <th>Send/Recieved</th>
         <th>Txid</th>
       </tr>
     </thead>
     <tbody>
-
+      @foreach($transactions as $transaction)
+        <tr>
+          <td>{{ $transaction->updated_at }}</td>
+          <td>{{ $transaction->amount }}</td>
+          <td>{{ $transaction->updated_at }}</td>
+          <td>{{ $transaction->address }}</td>
+          <td>{{ $transaction->send }}</td>
+          <td>{{ $transaction->txid }}</td>
+        </tr>
+      @endforeach
     </tbody>
   </table>
   </div>
