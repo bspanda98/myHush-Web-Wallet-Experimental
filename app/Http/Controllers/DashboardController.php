@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Addresses;
+use App\Transactions;
 
 class DashboardController extends Controller
 {
+
   /**
    * Create a new controller instance.
    *
@@ -21,8 +25,66 @@ class DashboardController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function Index()
   {
-      return view('dashboard');
+      $transactions = Transactions::where(['userid' => Auth::id()])->get();
+
+      $totalsend = $this->GetTotalAmount('send');
+      $totalrecieved = $this->GetTotalAmount('recieved');
+
+      $totaltransactions = $this->CountTransactions();
+
+      return view('dashboard', ['transactions' => $transactions,
+                                'totalsend' => $totalsend,
+                                'totalrecieved' => $totalrecieved,
+                                'totaltransactions' => $totaltransactions]);
   }
+  /**
+   * Show the dashboards addresses.
+   *
+   * @return \Illuminate\Http\Response
+   */
+   public function Addresses()
+   {
+     $addresses = Addresses::where(['userid' => Auth::id()])->get();
+
+     return view('dashboard.addresses', ['addresses' => $addresses]);
+
+   }
+
+   /**
+   *Get total amount send / recieved
+   *
+   *@return Float
+   */
+
+   private function GetTotalAmount($what)
+   {
+     $transactions = Transactions::where(['userid' => Auth::id(), 'category' => $what])->get();
+
+     $total = 0;
+
+     foreach($transactions as $transaction) {
+       $total = $total + $transaction['amount'];
+     }
+
+     return (float)$total;
+
+   }
+
+   /**
+   *Get toal amount of transactions
+   *
+   *@return int
+   */
+
+   private function CountTransactions()
+   {
+    $transactions = Transactions::where(['userid' => Auth::id()])->count();
+
+    return $transactions;
+
+   }
+
+
 }
