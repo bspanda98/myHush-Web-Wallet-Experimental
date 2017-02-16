@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
           $table->float('amount');
           $table->string('address');
           $table->string('txid');
+          $table->string('category');
           $table->timestamps();
       });
     }
