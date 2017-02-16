@@ -29,9 +29,15 @@ class DashboardController extends Controller
   {
       $transactions = Transactions::where(['userid' => Auth::id()])->get();
 
-      $totalsend = $this->GetTotalSend();
+      $totalsend = $this->GetTotalAmount('send');
+      $totalrecieved = $this->GetTotalAmount('recieved');
 
-      return view('dashboard', ['transactions' => $transactions, 'totalsend' => $totalsend]);
+      $totaltransactions = $this->CountTransactions();
+
+      return view('dashboard', ['transactions' => $transactions,
+                                'totalsend' => $totalsend,
+                                'totalrecieved' => $totalrecieved,
+                                'totaltransactions' => $totaltransactions]);
   }
   /**
    * Show the dashboards addresses.
@@ -47,14 +53,14 @@ class DashboardController extends Controller
    }
 
    /**
-   *Get total amount send
+   *Get total amount send / recieved
    *
    *@return Float
    */
 
-   private function GetTotalSend()
+   private function GetTotalAmount($what)
    {
-     $transactions = Transactions::where(['userid' => Auth::id(), 'category' => 'send'])->get();
+     $transactions = Transactions::where(['userid' => Auth::id(), 'category' => $what])->get();
 
      $total = 0;
 
@@ -65,5 +71,20 @@ class DashboardController extends Controller
      return (float)$total;
 
    }
+
+   /**
+   *Get toal amount of transactions
+   *
+   *@return int
+   */
+
+   private function CountTransactions()
+   {
+    $transactions = Transactions::where(['userid' => Auth::id()])->count();
+
+    return $transactions;
+
+   }
+
 
 }

@@ -17,3 +17,10 @@
 .latest-transactions {
   padding-top: 50px;
 }
+
+/*
+*Dashboard boxes
+*/
+.total-box {
+  text-align: center;
+}

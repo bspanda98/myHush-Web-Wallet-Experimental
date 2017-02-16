@@ -13,8 +13,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Total Transactions</div>
 
-                <div class="panel-body">
-
+                <div class="panel-body total-box">
+                    {{ $totaltransactions }} Transactions
                 </div>
             </div>
         </div>
@@ -22,8 +22,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Total Recieved</div>
 
-                <div class="panel-body">
-
+                <div class="panel-body total-box">
+                  {{ $totalrecieved }} ZEC
                 </div>
             </div>
         </div>
@@ -31,8 +31,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Total Send</div>
 
-                <div class="panel-body">
-                  {{ $totalsend }}
+                <div class="panel-body total-box">
+                  {{ $totalsend }} ZEC
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
     <h3>Latest transactions</h3>
   <div class="table-responsive">
   <table class="table">
-    <thead>
+    <thead class="latest-transactions-header">
       <tr>
         <th>Date</th>
         <th>Amount</th>
@@ -57,10 +57,9 @@
         <tr>
           <td>{{ $transaction->updated_at }}</td>
           <td>{{ $transaction->amount }}</td>
-          <td>{{ $transaction->updated_at }}</td>
-          <td>{{ $transaction->address }}</td>
-          <td>{{ $transaction->send }}</td>
-          <td>{{ $transaction->txid }}</td>
+          <td><a target="_blank" href="https://explorer.zcha.in/accounts/{{ $transaction->address }}">{{ $transaction->address }}</a></td>
+          <td>{{ $transaction->category }}</td>
+          <td><a target="_blank" href="https://explorer.zcha.in/transactions/{{ $transaction->txid }}">{{ $transaction->txid }}</a></td>
         </tr>
       @endforeach
     </tbody>
