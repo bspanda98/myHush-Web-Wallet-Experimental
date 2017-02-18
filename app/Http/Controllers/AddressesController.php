@@ -27,7 +27,7 @@ class AddressesController extends Controller
    */
    public function Index()
    {
-     $addresses = Addresses::where(['userid' => Auth::id()])->get();
+     $addresses = Addresses::where(['userid' => Auth::id()])->orderBy('id', 'desc')->get();
 
      return view('dashboard.addresses', ['addresses' => $addresses]);
    }
@@ -56,7 +56,7 @@ class AddressesController extends Controller
 
        $address->save();
 
-       return $NewAddress;
+       return $address;
 
      }
 

@@ -8,6 +8,10 @@
 <li><a href="{{ url('dashboard/addresses') }}">Addresses</a></li>
 @endsection
 
+@section('custom-scripts')
+<script src="/js/newaddress.js"></script>
+@endsection
+
 @section('content')
 <div class="container">
   <div class="row">
@@ -16,8 +20,9 @@
     <div class="form-group">
       <label for="label">Label:</label>
       <input type="text" class="form-control" id="label">
+       {{ csrf_field() }}
     </div>
-    <button type="button" class="btn btn-success">Generate</button>
+    <button type="button" id="generate-address" class="btn btn-success">Generate</button>
 
   </div>
   </div>
@@ -26,7 +31,7 @@
 <div class="row">
   <h3>Addresses</h3>
 <div class="table-responsive">
-<table class="table">
+<table class="table" id="addresses-table">
   <thead class="latest-transactions-header">
     <tr>
       <th>Date generated</th>
