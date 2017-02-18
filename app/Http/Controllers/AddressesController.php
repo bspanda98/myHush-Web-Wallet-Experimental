@@ -32,19 +32,32 @@ class AddressesController extends Controller
      return view('dashboard.addresses', ['addresses' => $addresses]);
    }
 
-   /*
+  /**
    * Generate a new addresses
    *
    * @return String Address
    */
-   public function NewAddress()
+   public function NewAddress(Request $request)
    {
      $client = new Client(env('ZCASHD'));
 
      $NewAddress = $client->execute('getnewaddress');
 
      if(!empty($NewAddress)) {
+       //Insert new address into DB
+       $address = new Addresses;
+
+       $address->userid = Auth::id();
+       $address->address = $NewAddress;
+
+       if(isset($request->label)) {
+         $address->label = $request->label;
+       }
+
+       $address->save();
+
        return $NewAddress;
+
      }
 
      return false;

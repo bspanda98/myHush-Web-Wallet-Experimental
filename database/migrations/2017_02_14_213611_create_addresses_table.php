@@ -17,6 +17,7 @@ class CreateAddressesTable extends Migration
           $table->increments('id');
           $table->integer('userid');
           $table->string('address');
+          $table->string('label')->nullable();
           $table->timestamps();
       });
     }
