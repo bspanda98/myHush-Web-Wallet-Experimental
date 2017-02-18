@@ -24,3 +24,17 @@
 .total-box {
   text-align: center;
 }
+
+/*
+*Address Modal
+*/
+.modal-address-text {
+  color: white;
+  text-align: center;
+  background-color: grey;
+}
+
+#modal-address-qr {
+  display: block;
+  margin: auto;
+}
