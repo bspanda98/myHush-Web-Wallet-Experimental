@@ -39,18 +39,6 @@ class DashboardController extends Controller
                                 'totalrecieved' => $totalrecieved,
                                 'totaltransactions' => $totaltransactions]);
   }
-  /**
-   * Show the dashboards addresses.
-   *
-   * @return \Illuminate\Http\Response
-   */
-   public function Addresses()
-   {
-     $addresses = Addresses::where(['userid' => Auth::id()])->get();
-
-     return view('dashboard.addresses', ['addresses' => $addresses]);
-
-   }
 
    /**
    *Get total amount send / recieved
