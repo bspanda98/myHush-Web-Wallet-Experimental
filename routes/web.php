@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/*
+*Dashboard pages Routes
+*/
+
 Route::get('/dashboard', 'DashboardController@Index');
 
-Route::get('/dashboard/addresses', 'DashboardController@Addresses');
+Route::get('/dashboard/addresses', 'AddressesController@Index');
+
+Route::post('/dashboard/addresses/new', 'AddressesController@NewAddress');
